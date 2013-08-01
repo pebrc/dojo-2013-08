@@ -48,11 +48,11 @@ class PotterKataSuite extends FunSuite {
   }
 
   test("distinct function test two sets of two books") {
-    assert(Seq(Seq(0, 1), Seq(0, 1)) === distinct(Seq(0, 0, 1, 1)))
+    assert(Seq(Set(0, 1), Set(0, 1)) === distinct(Seq(0, 0, 1, 1)))
   }
 
   test("distinct function test three sets of one book") {
-    assert(Seq(Seq(0), Seq(0), Seq(0)) === distinct(Seq(0, 0, 0)))
+    assert(Seq(Set(0), Set(0), Set(0)) === distinct(Seq(0, 0, 0)))
   }
 
   test("two sets of two books") {
