@@ -10,6 +10,6 @@ import dojo.DeepThought._
 class DeepThoughtSuite extends FunSuite {
 
   test("Answer to the Ultimate Question of Life, The Universe, and Everything") {
-    assert(42 === compute("foo"))
+    assert(42 === compute("testing commit"))
   }
 }
