@@ -6,9 +6,12 @@ package dojo
 object PotterKata {
 
   def distinct(input: Seq[Int]): Seq[Seq[Int]] = {
-     val distinct = input.distinct
-     val remainder = input.diff(distinct)
-     Seq(distinct, remainder)
+     if(input.isEmpty){
+       return Nil
+     }
+     val unique = input.distinct
+     val remainder = input.diff(unique)
+    (unique :: distinct(remainder).toList).toSeq
   }
 
   def compute(bookNumbers: Seq[Int]): Double = {
