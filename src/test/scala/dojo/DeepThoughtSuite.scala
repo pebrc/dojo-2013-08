@@ -27,6 +27,12 @@ class PotterKataSuite extends FunSuite {
 
   private val anyBook = 0
 
-//  assert_equal(8 * 2, price([0, 0]))
-//  assert_equal(8 * 3, price([1, 1, 1]))
+  test("two different books") {
+    assert(8 * 2 * 0.95 === compute(Seq(0,1)))
+  }
+
+//  assert_equal(8 * 2 * 0.95, price([0, 1]))
+//  assert_equal(8 * 3 * 0.9, price([0, 2, 4]))
+//  assert_equal(8 * 4 * 0.8, price([0, 1, 2, 4]))
+//  assert_equal(8 * 5 * 0.75, price([0, 1, 2, 3, 4]))
 }
