@@ -43,12 +43,16 @@ class PotterKataSuite extends FunSuite {
     assert(8 * 5 * 0.75 === compute(Seq(0,1,2,3,4)))
   }
 
-//  test("two same books out of three") {
-//    assert(8 + (8 * 2 * 0.95) === compute(Seq(0,0,1)))
-//  }
+  test("two same books out of three") {
+    assert(8 + (8 * 2 * 0.95) === compute(Seq(0,0,1)))
+  }
 
 
-//  assert_equal(8 + (8 * 2 * 0.95), price([0, 0, 1]))
+
+  test("two sets of two books") {
+    assert(Seq(Seq(0,1), Seq(0,1)) === distinct(Seq(0,0,1,1)))
+  }
+
 //  assert_equal(2 * (8 * 2 * 0.95), price([0, 0, 1, 1]))
 //  assert_equal((8 * 4 * 0.8) + (8 * 2 * 0.95), price([0, 0, 1, 2, 2, 3]))
 //  assert_equal(8 + (8 * 5 * 0.75), price([0, 1, 1, 2, 3, 4]))
