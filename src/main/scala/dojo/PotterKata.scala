@@ -12,8 +12,8 @@ object PotterKata {
   }
 
   def compute(bookNumbers: Seq[Int]): Double = {
-
-    getPriceForSet(bookNumbers)
+    (for(e <- distinct(bookNumbers)) yield
+    getPriceForSet(e)).sum
   }
 
   def getPriceForSet(bookNumbers: Seq[Int]): Double = {
