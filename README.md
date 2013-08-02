@@ -1,0 +1,1 @@
+We were doing the [KataPotter](http://www.codingdojo.org/cgi-bin/wiki.pl?KataPotter).
