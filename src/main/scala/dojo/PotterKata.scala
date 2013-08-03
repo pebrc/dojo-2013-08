@@ -7,14 +7,6 @@ object PotterKata {
   
   val discountSets = List(5,4,3,2,1)
 
-  def distinct(input: Seq[Int]): Seq[Set[Int]] = {
-    if (input.isEmpty) {
-      return Nil
-    }
-    val unique = input.distinct
-    val remainder = input.diff(unique)
-    unique.toSet +: distinct(remainder)
-  }
 
   def compute(bookNumbers: Seq[Int]): Double = {
     if(bookNumbers.isEmpty) {
@@ -58,34 +50,28 @@ object PotterKata {
     
   }
   
-  def containedSets(quantities: Seq[Int], sets: Seq[Int]): Seq[Seq[Int]] = {         
-      if(quantities.isEmpty) {
+  def possibleSets(quantities: Seq[Int], sets: Seq[Int]): Seq[Seq[Int]] = {
+      if(quantities.isEmpty || sets.isEmpty) {
         return Seq()
-      }      
-      val curr = sets.head;
-      if(quantities.size >= curr) {    	      	  
-    	 setsStartingFrom(sets, removeSet(curr, quantities).filter(_ > 0), Seq()) match {
-    	   case Nil => Seq(Seq(curr))
-    	   case aSeq => aSeq.map(_ :+ curr)
+      }    
+      
+      def permutationsBelow(thresholdValue:Int): Seq[Seq[Int]] = {             
+       if(quantities.size >= thresholdValue) {    	      	  
+    	 possibleSets(removeSet(thresholdValue, quantities).filter(_ > 0), sets) match {
+    	   case Nil => Seq(Seq(thresholdValue))
+    	   case aSeq => aSeq.map(_ :+ thresholdValue)
     	 }
-      } else {
-    	 setsStartingFrom(sets.tail, quantities, Seq())
-      }	
+       } else {
+         Seq()
+       }
+
+      }
+      permutationsBelow(sets.head) ++ possibleSets(quantities, sets.tail)
     
   }
   
-  def setsStartingFrom(discountSets:Seq[Int], input: Seq[Int], acc: Seq[Seq[Int]]): Seq[Seq[Int]] = {
-      if(input.isEmpty || discountSets.isEmpty) {
-        return acc
-      }      
-      var accumulated = acc;
-      if(discountSets.head <= input.size) {
-        accumulated = containedSets(input, discountSets) ++ acc
-      }
-      setsStartingFrom(discountSets.tail,input, accumulated)
-    }
   
   def sets(booksByNumber: Seq[Int]): Seq[Seq[Int]] = {
-    setsStartingFrom(discountSets, cardinalityByNumber(booksByNumber), Seq()).reverse
+    possibleSets(cardinalityByNumber(booksByNumber), discountSets)
   }
 }

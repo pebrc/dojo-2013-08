@@ -28,9 +28,6 @@ class PotterKataSuite extends FunSuite {
     assert(3 * 8 === compute(Seq(anyBook, anyBook, anyBook)))
   }
 
-
-
-
   test("two different books") {
     assert(8 * 2 * 0.95 === compute(Seq(0, 1)))
   }
@@ -48,14 +45,6 @@ class PotterKataSuite extends FunSuite {
 
   test("two same books out of three") {
     assert(8 + (8 * 2 * 0.95) === compute(Seq(0, 0, 1)))
-  }
-
-  test("distinct function test two sets of two books") {
-    assert(Seq(Set(0, 1), Set(0, 1)) === distinct(Seq(0, 0, 1, 1)))
-  }
-
-  test("distinct function test three sets of one book") {
-    assert(Seq(Set(0), Set(0), Set(0)) === distinct(Seq(0, 0, 0)))
   }
 
   test("two sets of two books") {
@@ -81,12 +70,17 @@ class PotterKataSuite extends FunSuite {
   }
   
   test("can detect one set") {
-    assert(Seq(Seq(2)) === containedSets(Seq(1,1), Seq(2,1)))
+    assert(Seq(Seq(2), Seq(1,1)) === possibleSets(Seq(1,1), Seq(2,1)))
   }
   
   test("can detect sets of ones") {
-    assert(Seq(Seq(1,1)) === containedSets(Seq(1,1), Seq(1)))
+    assert(Seq(Seq(1,1)) === possibleSets(Seq(1,1), Seq(1)))
   }
+  
+  test("can detect sets of three") {
+    assert(Seq(Seq(3), Seq(1,2), Seq(1,1,1)) === possibleSets(Seq(1,1,1), Seq(3,2,1)))
+  }
+
   
   test("can detect all possible sets") {
     assert(Seq(Seq(2), Seq(1,1)) === sets(Seq(0,1)))
