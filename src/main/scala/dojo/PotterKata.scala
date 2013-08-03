@@ -8,18 +8,16 @@ object PotterKata {
   val discountSets = List(5,4,3,2,1)
 
 
-  def compute(bookNumbers: Seq[Int]): Double = {
-    if(bookNumbers.isEmpty) {
+  def price(booksByNumber: Seq[Int]): Double = {
+    if(booksByNumber.isEmpty) {
       return 0
     }
-    sets(bookNumbers).map(getPriceFor).min    
+    setsEligibleForDiscount(booksByNumber).map(getPriceFor).min    
   }
   
   def getPriceFor(distinctSetSizes: Seq[Int]): Double = {
     distinctSetSizes.map(getPriceForDistinctNumberOfBooks(_)).sum
   }
-  
-  
 
   def getPriceForSet(bookNumbers: Set[Int]): Double = {
     getPriceForDistinctNumberOfBooks(bookNumbers.size)
@@ -50,28 +48,27 @@ object PotterKata {
     
   }
   
-  def possibleSets(quantities: Seq[Int], sets: Seq[Int]): Seq[Seq[Int]] = {
-      if(quantities.isEmpty || sets.isEmpty) {
+  def possibleSets(distinctQuantities: Seq[Int], sets: Seq[Int]): Seq[Seq[Int]] = {
+      if(distinctQuantities.isEmpty || sets.isEmpty) {
         return Seq()
       }    
       
       def permutationsBelow(thresholdValue:Int): Seq[Seq[Int]] = {             
-       if(quantities.size >= thresholdValue) {    	      	  
-    	 possibleSets(removeSet(thresholdValue, quantities).filter(_ > 0), sets) match {
+       if(distinctQuantities.size >= thresholdValue) {    	      	  
+    	 possibleSets(removeSet(thresholdValue, distinctQuantities).filter(_ > 0), sets) match {
     	   case Nil => Seq(Seq(thresholdValue))
     	   case aSeq => aSeq.map(_ :+ thresholdValue)
     	 }
        } else {
          Seq()
        }
-
       }
-      permutationsBelow(sets.head) ++ possibleSets(quantities, sets.tail)
+      permutationsBelow(sets.head) ++ possibleSets(distinctQuantities, sets.tail)
     
   }
   
   
-  def sets(booksByNumber: Seq[Int]): Seq[Seq[Int]] = {
+  def setsEligibleForDiscount(booksByNumber: Seq[Int]): Seq[Seq[Int]] = {
     possibleSets(cardinalityByNumber(booksByNumber), discountSets)
   }
 }
