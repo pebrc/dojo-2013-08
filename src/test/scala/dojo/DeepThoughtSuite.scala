@@ -4,10 +4,13 @@ import org.junit.runner.RunWith
 import org.scalatest.FunSuite
 import org.scalatest.junit.JUnitRunner
 
+
 import dojo.PotterKata._
 
 @RunWith(classOf[JUnitRunner])
 class PotterKataSuite extends FunSuite {
+  
+  private val anyBook = 0
 
   test("empty array") {
     assert(0 === compute(Seq()))
@@ -26,7 +29,7 @@ class PotterKataSuite extends FunSuite {
   }
 
 
-  private val anyBook = 0
+
 
   test("two different books") {
     assert(8 * 2 * 0.95 === compute(Seq(0, 1)))
@@ -64,17 +67,42 @@ class PotterKataSuite extends FunSuite {
   test("one set of five books and one set of one book") {
     assert(8 + (8 * 5 * 0.75) === compute(Seq(0, 1, 1, 2, 3, 4)))
   }
+  
+  test("can collect cardinality of each type of book in input") {
+    assert(Seq(3,1,2) === cardinalityByNumber(Seq(0,0,1,2,2,2)))
+  }
+  
+  test("can subtract a set from a list of quantities") {
+	  assert(Seq(1,1) === removeSet(2, Seq(2,2)))
+  }
+  
+  test("can subtract a set from a list of quantities with a remainder") {
+	  assert(Seq(1,1, 1) === removeSet(2, Seq(2,2,1)))
+  }
+  
+  test("can detect one set") {
+    assert(Seq(Seq(2)) === containedSets(Seq(1,1), Seq(2,1)))
+  }
+  
+  test("can detect sets of ones") {
+    assert(Seq(Seq(1,1)) === containedSets(Seq(1,1), Seq(1)))
+  }
+  
+  test("can detect all possible sets") {
+    assert(Seq(Seq(2), Seq(1,1)) === sets(Seq(0,1)))
+  }
 
-//  test("two sets of four books") {
-//    assert(2 * (8 * 4 * 0.8) === compute(Seq(0, 0, 1, 1, 2, 2, 3, 4)))
-//  }
+  test("two sets of four books") {
+    assert(2 * (8 * 4 * 0.8) === compute(Seq(0, 0, 1, 1, 2, 2, 3, 4)))
+  }
 
+  test("Three sets of five and two sets of four") {
+    assert(3 * (8 * 5 * 0.75) + 2 * (8 * 4 * 0.8) === compute(
+        Seq(0,0,0,0,0,
+        	1,1,1,1,1,
+        	2,2,2,2,
+        	3,3,3,3,3,
+        	4,4,4,4)))
+  }
 
-//  assert_equal(2 * (8 * 4 * 0.8), price([0, 0, 1, 1, 2, 2, 3, 4]))
-//  assert_equal(3 * (8 * 5 * 0.75) + 2 * (8 * 4 * 0.8),
-//    price([0, 0, 0, 0, 0,
-//  1, 1, 1, 1, 1,
-//  2, 2, 2, 2,
-//  3, 3, 3, 3, 3,
-//  4, 4, 4, 4]))
 }
