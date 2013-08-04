@@ -57,8 +57,8 @@ class PotterKataSuite extends FunSuite {
     assert(8 + (8 * 5 * 0.75) === price(Seq(0, 1, 1, 2, 3, 4)))
   }
   
-  test("can collect cardinality of each type of book in input") {
-    assert(Seq(3,1,2) === cardinalityByNumber(Seq(0,0,1,2,2,2)))
+  test("can collect ordered cardinality of each type of book in input") {
+    assert(Seq(3,2,1) === cardinalityByNumber(Seq(0,0,1,2,2,2)))
   }
   
   test("can subtract a set from a list of quantities") {
@@ -97,6 +97,17 @@ class PotterKataSuite extends FunSuite {
         	2,2,2,2,
         	3,3,3,3,3,
         	4,4,4,4)))
+  }
+  
+  test("gogognome") {
+    assert(78.8 === price(Seq(0, 0, 0, 1, 1, 2, 2, 2, 2, 3, 3, 4)))
+  }
+  
+  test("gogognome 2") {
+    assert(100 === price(Seq(0, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4)))
+    assert(141.6 === price(Seq(0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4)))
+	assert(108 === price(Seq(0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 3)))
+
   }
 
 }

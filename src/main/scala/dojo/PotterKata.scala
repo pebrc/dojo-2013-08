@@ -18,11 +18,6 @@ object PotterKata {
   def getPriceFor(distinctSetSizes: Seq[Int]): Double = {
     distinctSetSizes.map(getPriceForDistinctNumberOfBooks(_)).sum
   }
-
-  def getPriceForSet(bookNumbers: Set[Int]): Double = {
-    getPriceForDistinctNumberOfBooks(bookNumbers.size)
-    
-  }
   
   def getPriceForDistinctNumberOfBooks(n: Int) : Double = {
 	val discount = n match {
@@ -36,14 +31,14 @@ object PotterKata {
   }
   
   def cardinalityByNumber(booksByNumber: Seq[Int]):Seq[Int] = {
-    booksByNumber.groupBy(identity).mapValues(_.size).values.toSeq
+    booksByNumber.groupBy(identity).mapValues(_.size).values.toSeq.sorted.reverse
   }
   
   def removeSet(setOfSize:Int, distinctQuantities: Seq[Int]): Seq[Int] = {
     if(setOfSize == 0) {
       distinctQuantities
     } else {
-      (distinctQuantities.head -1) +: removeSet(setOfSize-1, distinctQuantities.tail)
+      (distinctQuantities.head - 1) +: removeSet(setOfSize - 1, distinctQuantities.tail)
     }
     
   }
